@@ -1,0 +1,8 @@
+renderer
+icons
+src
+node_modules
+.vite
+dist
+*.config.ts
+*.js
