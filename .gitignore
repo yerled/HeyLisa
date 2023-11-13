@@ -1,8 +1,8 @@
 renderer
 icons
-src
+# src
 node_modules
 .vite
 dist
-*.config.ts
-*.js
+.env
+out
