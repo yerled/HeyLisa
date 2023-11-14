@@ -1,5 +1,7 @@
 // main.js
 import path from 'path';
+import log from 'electron-log';
+import PackageJson from '../package.json';
 // import { updateElectronApp } from 'update-electron-app';
 
 import { app, BrowserWindow } from 'electron';
@@ -10,6 +12,8 @@ import { configDock } from './dock';
 import AppUpdater from './auto-updater';
 
 if (require('electron-squirrel-startup')) app.quit();
+
+log.info(`v${PackageJson.version}, App starting...`);
 
 // updateElectronApp();
 

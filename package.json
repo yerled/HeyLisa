@@ -1,7 +1,7 @@
 {
   "name": "heylisa",
   "productName": "HeyLisa",
-  "version": "0.7.8",
+  "version": "0.7.10",
   "description": "Hello World!",
   "main": ".vite/build/main.js",
   "scripts": {
@@ -10,8 +10,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "builder": "electron-builder",
-    "builder:publish": "electron-builder --publish always ",
+    "builder": "electron-builder -wm",
+    "builder:publish": "electron-builder  -wm --publish always ",
     "lint": "eslint --ext .ts,.tsx ."
   },
   "repository": {

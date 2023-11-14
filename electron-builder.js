@@ -12,6 +12,14 @@ module.exports = {
     entitlements: 'build/entitlements.mac.plist',
     entitlementsInherit: 'build/entitlements.mac.plist',
   },
+  win: {
+    target: [
+      {
+        target: 'nsis',
+        arch: ['x64', 'ia32'],
+      },
+    ],
+  },
   afterSign: 'scripts/notarize.js',
   publish: [
     {
