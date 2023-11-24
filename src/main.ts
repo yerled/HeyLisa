@@ -42,7 +42,7 @@ app.whenReady().then(() => {
 
     // mainWindow.loadFile('index.html');
     await mainWindow.loadURL('app://location/index.html');
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
   }
   _createWindow();
 
