@@ -3,16 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP -->
-    <meta
+    <!-- <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
+      content="default-src 'self'; script-src 'self' https://esm.sh"
+    /> -->
     <title>你好!</title>
+    <link rel="stylesheet" href="./src/selection.css" />
   </head>
   <body>
-    <h1>你好7</h1>
-    我们正在使用 Node.js <span id="node-version"></span>, Chromium
-    <span id="chrome-version"></span>, 和 Electron
-    <span id="electron-version"></span>.
+    <div class="main">
+      <div class="source">
+        <video class="video"></video>
+        <div class="container"></div>
+      </div>
+      <img id="result" class="result"></img>
+    </div>
+    <div> prompt: 
+    <input /></div>
+    <img id="source" ></img>
+    <script src="./src/selection.js" type="module"></script>
   </body>
 </html>

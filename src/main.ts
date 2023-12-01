@@ -10,6 +10,7 @@ import { createWindow } from './window';
 import { createTray } from './tray';
 import { configDock } from './dock';
 import AppUpdater from './auto-updater';
+import { initDesktopCapturer } from './desktop-capturer';
 
 if (require('electron-squirrel-startup')) app.quit();
 
@@ -40,9 +41,11 @@ app.whenReady().then(() => {
       },
     });
 
-    // mainWindow.loadFile('index.html');
-    await mainWindow.loadURL('app://location/index.html');
-    // mainWindow.webContents.openDevTools();
+    initDesktopCapturer(mainWindow);
+
+    mainWindow.loadFile('index.html');
+    // await mainWindow.loadURL('app://location/index.html');
+    mainWindow.webContents.openDevTools();
   }
   _createWindow();
 
