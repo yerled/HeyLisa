@@ -3,6 +3,7 @@ import path from 'path';
 import log from 'electron-log';
 import PackageJson from '../package.json';
 // import { updateElectronApp } from 'update-electron-app';
+import isDev from 'electron-is-dev';
 
 import { app, BrowserWindow } from 'electron';
 import { createWindow } from './window';
@@ -10,7 +11,7 @@ import { createWindow } from './window';
 import { createTray } from './tray';
 import { configDock } from './dock';
 import AppUpdater from './auto-updater';
-import { initDesktopCapturer } from './desktop-capturer';
+import './ipcmain';
 
 if (require('electron-squirrel-startup')) app.quit();
 
@@ -21,8 +22,6 @@ log.info(`v${PackageJson.version}, App starting...`);
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const serve = require('./serve');
 serve({ directory: 'renderer/out' });
-
-// const isProd = process.env.NODE_ENV === 'production';
 
 // 这段程序将会在 Electron 结束初始化
 // 和创建浏览器窗口的时候调用
@@ -38,14 +37,21 @@ app.whenReady().then(() => {
       height: 720,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js'),
+        ...(isDev
+          ? {
+              nodeIntegration: false,
+              contextIsolation: true,
+              // enableRemoteModule: false,
+            }
+          : {}),
       },
     });
 
-    initDesktopCapturer(mainWindow);
-
-    mainWindow.loadFile('index.html');
+    mainWindow.loadURL('http://localhost:3000/V2-Pig/art/lcm-live');
+    // mainWindow.loadURL('http://heylisa-alpha.popmart.com/');
+    // mainWindow.loadFile('index.html');
     // await mainWindow.loadURL('app://location/index.html');
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
   }
   _createWindow();
 

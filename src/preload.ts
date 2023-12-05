@@ -1,45 +1,34 @@
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, contextBridge } from 'electron';
 
-ipcRenderer.on('SET_SOURCE', async (event, sourceId) => {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: false,
-      video: {
-        mandatory: {
-          chromeMediaSource: 'desktop',
-          chromeMediaSourceId: sourceId,
-          // minWidth: 500,
-          // maxWidth: 500,
-          // minHeight: 500,
-          // maxHeight: 500,
-        },
-      },
-    });
+let hasLcmLiveWindow = false;
 
-    handleStream(stream);
-  } catch (e) {
-    handleError(e);
-  }
+contextBridge.exposeInMainWorld('__HEYLISA_ELECTRON__', {
+  main: {
+    isOSX: () => process.platform === 'darwin',
+    isWindows: () => process.platform === 'win32',
+    isLinux: () => /linux/.test(process.platform),
+    openScreenSecurity: () =>
+      ipcRenderer.invoke('electronMain:openScreenSecurity'),
+    getScreenAccess: () => ipcRenderer.invoke('electronMain:getScreenAccess'),
+    getScreenSources: () =>
+      ipcRenderer.invoke('electronMain:screen:getSources'),
+    openLCMLiveWindow: (options: {
+      width?: number;
+      height?: number;
+      url: string;
+      alwaysOnTop?: boolean;
+    }) => {
+      ipcRenderer.invoke('open-lcm-live-window', options);
+      hasLcmLiveWindow = true;
+    },
+    hasLcmLiveWindow: () => !!hasLcmLiveWindow,
+    closeLCMLiveWindow: () => {
+      ipcRenderer.invoke('close-lcm-live-window');
+      hasLcmLiveWindow = false;
+    },
+  },
 });
 
-function handleStream(stream) {
-  const video = document.querySelector('video');
-  video.srcObject = stream;
-  video.onloadedmetadata = e => video.play();
-
-  return;
-  const recorder = new MediaRecorder(stream);
-
-  recorder.ondataavailable = event => {
-    if (event.data.size > 0) {
-      console.log(event.data);
-      window.yerledBlob = new Blob([event.data], { type: 'image/jpeg' });
-      console.log('yerledBlob ~~~~~~', window.yerledBlob);
-    }
-  };
-  recorder.start(200);
-}
-
-function handleError(e) {
-  console.log(e);
-}
+ipcRenderer.on('lcm-live-window-closed', () => {
+  hasLcmLiveWindow = false;
+});

@@ -8,6 +8,9 @@ dependencies:
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
+  electron-is-dev:
+    specifier: ^2.0.0
+    version: 2.0.0
   electron-log:
     specifier: ^5.0.0
     version: 5.0.0
@@ -17,6 +20,9 @@ dependencies:
   electron-store:
     specifier: ^8.1.0
     version: 8.1.0
+  electron-util:
+    specifier: ^0.17.2
+    version: 0.17.2
   update-electron-app:
     specifier: ^3.0.0
     version: 3.0.0
@@ -3355,6 +3361,14 @@ packages:
     dev: true
     optional: true
 
+  /electron-is-dev@1.2.0:
+    resolution: {integrity: sha512-R1oD5gMBPS7PVU8gJwH6CtT0e6VSoD0+SzSnYpNm+dBkcijgA+K7VAMHDfnRq/lkKPZArpzplTW6jfiMYosdzw==}
+    dev: false
+
+  /electron-is-dev@2.0.0:
+    resolution: {integrity: sha512-3X99K852Yoqu9AcW50qz3ibYBWY79/pBhlMCab8ToEWS48R0T9tyxRiQhwylE7zQdXrMnx2JKqUJyMPmt5FBqA==}
+    dev: false
+
   /electron-log@5.0.0:
     resolution: {integrity: sha512-vB3akupmQvA8jAyNL9rULZtf6WoP8vsabjXsRtiqXS6/D37SwN/4LEyj4JD+9Bv6xoTcx/LrVnsIKEEWdq5ClQ==}
     engines: {electron: '>= 13', node: '>= 14'}
@@ -3431,6 +3445,13 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /electron-util@0.17.2:
+    resolution: {integrity: sha512-4Kg/aZxJ2BZklgyfH86px/D2GyROPyIcnAZar+7KiNmKI2I5l09pwQTP7V95zM3FVhgDQwV9iuJta5dyEvuWAw==}
+    dependencies:
+      electron-is-dev: 1.2.0
+      new-github-issue-url: 0.2.1
+    dev: false
 
   /electron-winstaller@5.2.1:
     resolution: {integrity: sha512-2UuvOGMLLGJioIBsqWANF1A19G7uJuIifae8/pR3FClI21aCJc5nutAOGnZI17kkxUc47UqByqKOl0XSVtwAlQ==}
@@ -5365,6 +5386,11 @@ packages:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
     engines: {node: '>= 0.6'}
     dev: true
+
+  /new-github-issue-url@0.2.1:
+    resolution: {integrity: sha512-md4cGoxuT4T4d/HDOXbrUHkTKrp/vp+m3aOA7XXVYwNsUNMK49g3SQicTSeV5GIz/5QVGAeYRAOlyp9OvlgsYA==}
+    engines: {node: '>=10'}
+    dev: false
 
   /nice-try@1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
